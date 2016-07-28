@@ -5,7 +5,16 @@ namespace Application\Domain;
 class Hand
 {
     private $hand;
-    public $highCard =0;
+    public $highCard = 0;
+    public $pairCards = 0;
+
+    /**
+     * @return int
+     */
+    public function getPairCards()
+    {
+        return $this->pairCards;
+    }
     private $score;
     public $remainingHand;
     private $suit;
@@ -47,6 +56,7 @@ class Hand
             $card++;
         }
         $this->highCard();
+        $this->pairCards();
     }
 
     public function highCard()
@@ -59,6 +69,26 @@ class Hand
             }
         }
         return $this->highCard;
+    }
+
+    public function pairCards()
+    {
+
+
+
+        $array=[];
+        foreach ($this->value as $value) {
+
+            if (in_array($value,$array)) {
+
+               $this->pairCards=$value;
+            }
+            $array[]=$value;
+        }
+
+        print_r($this);
+
+        return $this->pairCards;
     }
 
     public function setHighCard($value)

@@ -3,6 +3,7 @@
 namespace Application\Domain;
 
 use Application\Domain\Rankers\HighCardRanker;
+use Application\Domain\Rankers\PairRanker;
 
 class Round
 {
@@ -13,7 +14,7 @@ class Round
     public $rankers;
     private $thing;
 
-    public function __construct(Hand $handOne,Hand $handTwo)
+    public function __construct(Hand $handOne, Hand $handTwo)
     {
         $this->handOne = $handOne;
         $this->handTwo = $handTwo;
@@ -22,76 +23,59 @@ class Round
 
     public function compare()
     {
-        $this->rankers = new HighCardRanker($this->handOne, $this->handTwo);
-
-
-        for ($i = 1; $i <= 5;$i++) {
-            $this->thing = $this->rankers->comparePlayerCards($i);// Black wins, White wins or Tie
+        $this->rankers[1] = new HighCardRanker($this->handOne, $this->handTwo);
+            $this->thing = $this->rankers[1]->comparePlayerCards();// Black wins, White wins or Tie
             if ($this->thing == 'Tie') {
 
-                $this->match();
+                $this->match($this->handOne->highCard(),$this->handTwo->highCard());
 
-            }else{
-             return $this->thing;
+            } else {
+                return $this->thing;
             }
-        }
 
-        return 'Next Card';
-        //$this->rankers[] = new PairRanker( $this->handOne, $this->handTwo);
+        //return 'Next Card';
+        $this->handOne->remainingHand = $this->handOne->getValue();
+        $this->rankers[2] = new PairRanker( $this->handOne, $this->handTwo);
+
+            $this->thing = $this->rankers[2]->comparePlayerCards();// Black wins, White wins or Tie
+            if ($this->thing == 'Tie') {
+
+                $this->match($this->handOne->pairCards(), $this->handTwo->pairCards());
+
+            } else {
+                return $this->thing;
+            }
+
         //$this->rankers[] = new TripleRanker( $this->handOne, $this->handTwo);
         //$this->rankers[] = new TwoPairRanker( $this->handOne, $this->handTwo);
         //$this->rankers[] = new PokerRanker( $this->handOne, $this->handTwo);
         //$this->rankers[] = new FlushRanker( $this->handOne, $this->handTwo);
-       // $this->result = 'White wins. - with high card: Ace';
+        // $this->result = 'White wins. - with high card: Ace';
 
     }
 
 
-function match()
-{
-
-        echo 'c:' . count($this->handOne->remainingHand) . PHP_EOL;
-        print_r($this->handOne->remainingHand);
-
-
+    function match($compareToOne, $compareToTwo)
+    {
         $index = 1;
         foreach ($this->handOne->remainingHand as $element) {
-            if ($element == $this->handOne->highCard()) {
+
+
+            if ($element == $compareToOne) {
+
                 unset($this->handOne->remainingHand[$index]);
             }
             $index++;
         }
 
-        echo 'c:' . count($this->handOne->remainingHand) . PHP_EOL;
-        print_r($this->handOne->remainingHand);
-
-        echo 'c2:' . count($this->handTwo->remainingHand) . PHP_EOL;
-        print_r($this->handTwo->remainingHand);
-// exit();
         $index = 1;
         foreach ($this->handTwo->remainingHand as $element) {
-            if ($element == $this->handTwo->highCard()) {
+            if ($element == $compareToTwo) {
                 unset($this->handTwo->remainingHand[$index]);
             }
             $index++;
         }
-
-        echo 'c2:' . count($this->handTwo->remainingHand) . PHP_EOL;
-        print_r($this->handTwo->remainingHand);
-
-    $this->handOne->setHighCard(0);
-    $this->handTwo->setHighCard(0);
-    echo 'fin' . $this->handOne->highCard();
-    echo 'fin' . $this->handTwo->highCard();
-
-
-
-}
-
-
-
-
-
-
-
+        $this->handOne->setHighCard(0);
+        $this->handTwo->setHighCard(0);
+    }
 }

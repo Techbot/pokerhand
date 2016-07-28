@@ -12,10 +12,10 @@ class HighCardRanker
         $this->white = $white;
     }
 
-    public function comparePlayerCards($i){
+    public function comparePlayerCards(){
 
-      echo PHP_EOL . 'bl:' . $this->black->highCard() . PHP_EOL;
-      echo PHP_EOL .'wh:' . $this->white->highCard() . PHP_EOL;
+      //echo PHP_EOL . 'bl:' . $this->black->highCard() . PHP_EOL;
+      //echo PHP_EOL .'wh:' . $this->white->highCard() . PHP_EOL;
 
         if ($this->black->highCard() > $this->white->highCard()){
 
@@ -28,8 +28,6 @@ class HighCardRanker
             return 'white wins with' . $this->white->highCard();
 
         }
-
         return 'Tie';
     }
-
 }
