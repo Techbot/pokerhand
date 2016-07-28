@@ -43,12 +43,8 @@ class HandTest extends \PHPUnit_Framework_TestCase
     }
 
     public function test_it_should_be_be_a_valid_high_card(){
-        $this->assertContains($this->black->highCard(), [2,3,4,5,6,7,8,9,'Jack','Queen','King','Ace']);
-        $this->assertContains($this->white->highCard(), [2,3,4,5,6,7,8,9,'Jack','Queen','King','Ace']);
-
-        echo $this->white->highCard();
-        exit();
-
+        $this->assertContains($this->black->highCard(), [2,3,4,5,6,7,8,9,10,11,12,13,14]);
+        $this->assertContains($this->white->highCard(), [2,3,4,5,6,7,8,9,10,11,12,13,14]);
     }
 }
 

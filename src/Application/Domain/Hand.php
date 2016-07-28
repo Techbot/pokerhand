@@ -5,35 +5,19 @@ namespace Application\Domain;
 class Hand
 {
     private $hand;
-    public $highCard =1;
+    public $highCard =0;
     private $score;
+    public $remainingHand;
     private $suit;
     private $value;
     private $card;
 
-
     /**
      * @return mixed
      */
-    public function getSuit()
+    public function getRemainingHand()
     {
-        return $this->suit;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCard()
-    {
-        return $this->card;
+        return $this->remainingHand;
     }
 
     private function __construct($hand){
@@ -57,20 +41,31 @@ class Hand
             $this->value[$card] = substr($value,0,1);
             $this->suit[$card] = substr($value,1,1);
             $this->score[$card] = $this->getScore($this->value[$card]);
+            $this->remainingHand[$card] = $this->score[$card];
+
+
             $card++;
         }
+        $this->highCard();
     }
 
     public function highCard()
     {
-        foreach ($this->score as $score) {
+        foreach ($this->remainingHand as $score) {
+
             if ($score > $this->highCard) {
 
                 $this->highCard = $score;
             }
         }
-        return $this->getFace($this->highCard);
+        return $this->highCard;
     }
+
+    public function setHighCard($value)
+    {
+       $this->highCard = $value;
+    }
+
 
     private function getFace($card)
     {
@@ -89,7 +84,7 @@ class Hand
         return $card;
     }
 
-    private function getScore($card)
+    public function getScore($card)
     {
         if($card=='A'){
             return 14;
@@ -104,5 +99,29 @@ class Hand
             return 11;
         }
         return $card;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSuit()
+    {
+        return $this->suit;
+    }
+
+    /**
+     * @return array
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCard()
+    {
+        return $this->card;
     }
 }
