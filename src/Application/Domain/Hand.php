@@ -11,6 +11,7 @@ class Hand
     private $pairCards = 0;
     private $secondPairCards = 0;
     private $tripleCards = 0;
+    private $pokerCards = 0;
     private $score;
     private $suit;
     private $rank;
@@ -43,22 +44,39 @@ class Hand
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $this->pairCards = $analyser->pairCards();
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////Only test for two pair if you already got one pair///////////////////////////
 
         if ($this->pairCards) {
             $this->secondPairCards = $analyser->twoPairCards();
         };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////Only test for triple if you already got a pair////////////////////////////////
 
         if ($this->pairCards) {
             $this->tripleCards = $analyser->tripleCards();
+        };
+
+        ///////////////////////////////////Only test for Poker if you already got a triple//////////////////////////////
+
+        if ($this->tripleCards) {
+            $this->pokerCards = $analyser->pokerCards();
         };
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         print_r($this);
     }
+
+
+    /**
+     * @return int
+     */
+    public function getPokerCards()
+    {
+        return $this->pokerCards;
+    }
+
+
 
     /**
      * @return int

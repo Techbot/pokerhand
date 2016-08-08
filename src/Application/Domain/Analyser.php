@@ -73,4 +73,29 @@ class Analyser
         }
         return false;
     }
+
+    public function pokerCards()
+    {
+        $arrayOfPokers = [];
+        foreach ($this->hand->getValue() as $value) {
+            if ($value == $this->hand->getTripleCards()) {
+                $arrayOfPokers[] = $value;
+                if (count($arrayOfPokers) === 4) {
+                    return $value;
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -86,4 +86,17 @@ class RoundTest extends WebTestCase
         $this->assertEquals( 0, $white->getTripleCards());
 
     }
+
+    public function test_it_should_return_one_poker(){
+
+        $black = Hand::fromArray(['2H', 'KH', 'KS', 'KC', 'KD']);
+        $white = Hand::fromArray(['2C', '3H', '4S', '8C', '9H']);
+        $this->round= new Round( $black,  $white);
+
+        $this->round->compare();
+
+        $this->assertEquals('K', $black->getPokerCards());
+        $this->assertEquals( 0, $white->getPokerCards());
+
+    }
 }
