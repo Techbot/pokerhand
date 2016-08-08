@@ -110,4 +110,16 @@ class RoundTest extends WebTestCase
         $this->assertEquals(6, $black->getStraightCards());
         $this->assertEquals( 0, $white->getStraightCards());
     }
+
+    public function test_it_should_return_one_flush(){
+
+        $black = Hand::fromArray(['2D', '3D', '4D', '5D', '6D']);
+        $white = Hand::fromArray(['2C', '3H', '4S', '5C', '6H']);
+        $this->round= new Round( $black,  $white);
+
+        $this->round->compare();
+
+        $this->assertEquals('D', $black->getFlush());
+        $this->assertEquals( 0, $white->getFlush());
+    }
 }

@@ -107,4 +107,15 @@ class Analyser
         }
         return $value;
     }
+
+    public function flushCards()
+    {
+        foreach($this->hand->getSuit() as $suit){
+            $suitArray[] = serialize($suit);
+        }
+        if(count(array_unique($suitArray)) === 1) {
+             return ($this->hand->getSuit()[1]->getString()); //returns suit, use get straight to determine rank
+         }
+        return false;
+    }
 }

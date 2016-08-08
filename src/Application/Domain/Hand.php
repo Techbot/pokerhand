@@ -14,11 +14,18 @@ class Hand
     private $tripleCards = 0;
     private $pokerCards = 0;
     private $straightCards = 0;
+    private $flush = 0;
     private $score;
     private $suit;
     private $rank;
     private $card;
     private $highCard = 0;
+
+    private function __construct($hand)
+    {
+        $this->hand = $hand;
+        $this->evaluate();
+    }
 
     public static function fromArray(array $hand)
     {
@@ -70,9 +77,23 @@ class Hand
             $this->straightCards = $analyser->straightCards();
         };
 
+        ///////////////////////////////////Only test for flush if you have a straight/////////////////////////////
+
+        if ($this->straightCards) {
+            $this->flush = $analyser->flushCards();
+        };
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
       //  print_r($this);
+    }
+
+    /**
+     * @return int
+     */
+    public function getFlush()
+    {
+        return $this->flush;
     }
 
     /**
@@ -131,13 +152,6 @@ class Hand
         return $this->remainingHand;
     }
 
-    private function __construct($hand)
-    {
-
-        $this->hand = $hand;
-
-        $this->evaluate();
-    }
 
 
     public function setHighCard($rank)

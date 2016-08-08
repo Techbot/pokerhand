@@ -9,7 +9,7 @@ class Suit
     /**
      * @return mixed
      */
-    public function getSuit()
+    public function getString()
     {
         return $this->suit;
     }
