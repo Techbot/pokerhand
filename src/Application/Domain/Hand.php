@@ -6,24 +6,23 @@ use Application\Domain\Analyser;
 
 class Hand
 {
+    public $remainingHand;
     private $hand;
     private $pairCards = 0;
     private $secondPairCards = 0;
-
-
     private $score;
-    public $remainingHand;
     private $suit;
     private $value;
     private $card;
     private $highCard = 0;
 
-    public function evaluate(){
-        $card= 1;
-        foreach($this->hand as $suit => $value){
+    public function evaluate()
+    {
+        $card = 1;
+        foreach ($this->hand as $suit => $value) {
             $this->card[$card] = $value;
-            $this->value[$card] = substr($value,0,1);
-            $this->suit[$card] = substr($value,1,1);
+            $this->value[$card] = substr($value, 0, 1);
+            $this->suit[$card] = substr($value, 1, 1);
             $this->score[$card] = $this->getScore($this->value[$card]);
             $this->remainingHand[$card] = $this->score[$card];
             $card++;
@@ -38,14 +37,14 @@ class Hand
         $this->pairCards = $analyser->pairCards();
 
         ///////////////////////////////////////
-        if  ($this->pairCards){
+        if ($this->pairCards) {
             $this->secondPairCards = $analyser->twoPairCards();
         };
 
         ///////////////////////////////////////
 
-        if  ($this->pairCards){
-      //      $this->tripleCards = $analyser->tripleCards();
+        if ($this->pairCards) {
+            //      $this->tripleCards = $analyser->tripleCards();
         };
     }
 
@@ -81,39 +80,39 @@ class Hand
         return $this->remainingHand;
     }
 
-    private function __construct($hand){
+    private function __construct($hand)
+    {
 
-        $this->hand =$hand;
+        $this->hand = $hand;
 
         $this->evaluate();
     }
 
-    public static function fromArray(array $hand){
+    public static function fromArray(array $hand)
+    {
 
         $newHand = new Hand($hand);
 
         return $newHand;
     }
 
-
     public function setHighCard($value)
     {
-       $this->highCard = $value;
+        $this->highCard = $value;
     }
-
 
     private function getFace($card)
     {
-        if($card==14){
+        if ($card == 14) {
             return 'Ace';
         }
-        if($card==13){
+        if ($card == 13) {
             return 'King';
         }
-        if($card==12){
+        if ($card == 12) {
             return 'Queen';
         }
-        if($card==11){
+        if ($card == 11) {
             return 'Jack';
         }
         return $card;
@@ -121,16 +120,16 @@ class Hand
 
     public function getScore($card)
     {
-        if($card=='A'){
+        if ($card == 'A') {
             return 14;
         }
-        if($card=='K'){
+        if ($card == 'K') {
             return 13;
         }
-        if($card=='Q'){
+        if ($card == 'Q') {
             return 12;
         }
-        if($card=='J'){
+        if ($card == 'J') {
             return 11;
         }
         return $card;

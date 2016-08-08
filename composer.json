@@ -31,7 +31,8 @@
         "phpunit/phpunit": "^5.4",
         "behat/behat": "^3.1",
         "phpspec/phpspec": "^3.0",
-        "ramsey/uuid": "^3.5"
+        "ramsey/uuid": "^3.5",
+        "league/tactician": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
