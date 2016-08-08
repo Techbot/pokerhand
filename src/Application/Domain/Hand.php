@@ -8,10 +8,12 @@ class Hand
 {
     public $remainingHand;
     private $hand;
+
     private $pairCards = 0;
     private $secondPairCards = 0;
     private $tripleCards = 0;
     private $pokerCards = 0;
+    private $straightCards = 0;
     private $score;
     private $suit;
     private $rank;
@@ -26,14 +28,14 @@ class Hand
 
     public function evaluate()
     {
-        $card = 1;
+        $cardnumber = 1;
         foreach ($this->hand as $suit => $card) {
-            $this->card[$card] = $card;
-            $this->rank[$card] = substr($card, 0, 1);
-            $this->suit[$card] = new Suit(substr($card, 1, 1));
-            $this->score[$card] = $this->getScore($this->rank[$card]); // in case it's a face card
-            $this->remainingHand[$card] = $this->score[$card];
-            $card++;
+            $this->card[$cardnumber] = $card;
+            $this->rank[$cardnumber] = substr($card, 0, 1);
+            $this->suit[$cardnumber] = new Suit(substr($card, 1, 1));
+            $this->score[$cardnumber] = $this->getScore($this->rank[$cardnumber]); // in case it's a face card
+            $this->remainingHand[$cardnumber] = $this->score[$cardnumber];
+            $cardnumber++;
         }
         $analyser = new Analyser($this);
 
@@ -62,10 +64,27 @@ class Hand
             $this->pokerCards = $analyser->pokerCards();
         };
 
+        ///////////////////////////////////Only test for straight if you have no duplicates/////////////////////////////
+
+        if (!$this->pairCards) {
+            $this->straightCards = $analyser->straightCards();
+        };
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         print_r($this);
     }
+
+
+    /**
+     * @return int
+     */
+    public function getStraightCards()
+    {
+        return $this->straightCards;
+    }
+
 
 
     /**

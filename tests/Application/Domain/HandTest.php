@@ -19,8 +19,8 @@ class HandTest extends \PHPUnit_Framework_TestCase
 
     public function testAllisOk()
     {
-        $this->assertInstanceOf(Hand::class,$this->black );
-        $this->assertInstanceOf(Hand::class,$this->white );
+        $this->assertInstanceOf(Hand::class, $this->black );
+        $this->assertInstanceOf(Hand::class, $this->white );
     }
 
     public function test_it_should_evaluate_5_cards(){

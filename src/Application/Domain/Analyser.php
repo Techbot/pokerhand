@@ -88,14 +88,18 @@ class Analyser
         return false;
     }
 
+    public function straightCards()
+    {
+        $previousRank = 0;
 
+        foreach ($this->hand->getValue() as $key=>$value) {
 
+            if ($value !== $previousRank + 1 && $key !==0 ){
+                return false;
+            }
+             $previousRank= $value;
 
-
-
-
-
-
-
-
+        }
+        return $value;
+    }
 }
