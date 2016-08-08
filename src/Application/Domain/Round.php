@@ -4,6 +4,7 @@ namespace Application\Domain;
 
 use Application\Domain\Rankers\HighCardRanker;
 use Application\Domain\Rankers\PairRanker;
+use Application\Domain\Rankers\TripleRanker;
 
 class Round
 {
@@ -21,6 +22,7 @@ class Round
 
     public function compare()
     {
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $this->rankers[1] = new HighCardRanker($this->handOne, $this->handTwo);
         $this->thing = $this->rankers[1]->comparePlayerCards();// Black wins, White wins or Tie
         if ($this->thing == 'Tie') {
@@ -30,9 +32,11 @@ class Round
         } else {
             return $this->thing;
         }
-
         //return 'Next Card';
         $this->handOne->remainingHand = $this->handOne->getValue();
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         $this->rankers[2] = new PairRanker($this->handOne, $this->handTwo);
 
         $this->thing = $this->rankers[2]->comparePlayerCards();// Black wins, White wins or Tie
@@ -43,8 +47,9 @@ class Round
         } else {
             return $this->thing;
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //$this->rankers[] = new TripleRanker( $this->handOne, $this->handTwo);
+        $this->rankers[3] = new TripleRanker( $this->handOne, $this->handTwo);
         //$this->rankers[] = new TwoPairRanker( $this->handOne, $this->handTwo);
         //$this->rankers[] = new PokerRanker( $this->handOne, $this->handTwo);
         //$this->rankers[] = new FlushRanker( $this->handOne, $this->handTwo);

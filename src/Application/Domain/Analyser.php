@@ -10,21 +10,15 @@ namespace Application\Domain;
 
 class Analyser
 {
-
     private $hand;
     private $highCard;
 
     function __construct($hand){
-
         $this->hand = $hand;
-
     }
-
-
 
     public function highCard()
     {
-
         foreach ($this->hand->getRemainingHand() as $score) {
 
             if ($score > $this->hand->getHighCard()) {
@@ -64,5 +58,19 @@ class Analyser
             }
             $arrayOfPairs[]=$value;
         }
+    }
+
+    public function tripleCards()
+    {
+        $arrayOfTriples = [];
+        foreach ($this->hand->getValue() as $value) {
+            if ($value == $this->hand->getPairCards()) {
+                $arrayOfTriples[] = $value;
+                if (count($arrayOfTriples) === 3) {
+                    return $value;
+                }
+            }
+        }
+        return false;
     }
 }
