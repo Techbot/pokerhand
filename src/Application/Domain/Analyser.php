@@ -25,7 +25,7 @@ class Analyser
     public function highCard()
     {
 
-        foreach ($this->hand->remainingHand as $score) {
+        foreach ($this->hand->getRemainingHand() as $score) {
 
             if ($score > $this->hand->getHighCard()) {
 
@@ -38,7 +38,7 @@ class Analyser
     public function pairCards()
     {
         $array=[];
-        foreach ($this->hand->value as $value) {
+        foreach ($this->hand->getValue() as $value) {
 
             if (in_array($value,$array)) {
 
@@ -52,9 +52,9 @@ class Analyser
     public function twoPairCards()
     {
         $array=[];
-        foreach ($this->hand->value as $value) {
+        foreach ($this->hand->getValue() as $value) {
 
-            if ($value == $this->hand->pairCards)
+            if ($value == $this->hand->getPairCards())
             {
                 //skip
             }

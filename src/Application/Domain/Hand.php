@@ -7,7 +7,13 @@ use Application\Domain\Analyser;
 class Hand
 {
     private $hand;
-
+    private $pairCards = 0;
+    private $secondPairCards = 0;
+    private $score;
+    public $remainingHand;
+    private $suit;
+    private $value;
+    private $card;
     private $highCard = 0;
 
     /**
@@ -17,15 +23,6 @@ class Hand
     {
         return $this->highCard;
     }
-    public $pairCards = 0;
-    public $secondPairCards = 0;
-    private $score;
-    public $remainingHand;
-    private $suit;
-    public $value;
-    private $card;
-
-
 
     /**
      * @return int
@@ -34,7 +31,6 @@ class Hand
     {
         return $this->pairCards;
     }
-
 
     /**
      * @return mixed
