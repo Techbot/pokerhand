@@ -16,14 +16,20 @@ class Hand
     private $card;
     private $highCard = 0;
 
+    public static function fromArray(array $hand)
+    {
+        $newHand = new Hand($hand);
+        return $newHand;
+    }
+
     public function evaluate()
     {
         $card = 1;
-        foreach ($this->hand as $suit => $value) {
-            $this->card[$card] = $value;
-            $this->value[$card] = substr($value, 0, 1);
-            $this->suit[$card] = substr($value, 1, 1);
-            $this->score[$card] = $this->getScore($this->value[$card]);
+        foreach ($this->hand as $suit => $card) {
+            $this->card[$card] = $card;
+            $this->value[$card] = substr($card, 0, 1);
+            $this->suit[$card] = new Suit(substr($card, 1, 1));
+            $this->score[$card] = $this->getScore($this->value[$card]); // in case it's a face card
             $this->remainingHand[$card] = $this->score[$card];
             $card++;
         }
@@ -88,13 +94,6 @@ class Hand
         $this->evaluate();
     }
 
-    public static function fromArray(array $hand)
-    {
-
-        $newHand = new Hand($hand);
-
-        return $newHand;
-    }
 
     public function setHighCard($value)
     {
