@@ -7,7 +7,6 @@ use Application\Domain\Rankers\PairRanker;
 
 class Round
 {
-
     private $handOne;
     private $handTwo;
     public $result;
@@ -18,7 +17,6 @@ class Round
     {
         $this->handOne = $handOne;
         $this->handTwo = $handTwo;
-
     }
 
     public function compare()
@@ -60,9 +58,7 @@ class Round
         $index = 1;
         foreach ($this->handOne->remainingHand as $element) {
 
-
             if ($element == $compareToOne) {
-
                 unset($this->handOne->remainingHand[$index]);
             }
             $index++;

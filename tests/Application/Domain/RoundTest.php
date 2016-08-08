@@ -12,29 +12,37 @@ class RoundTest extends WebTestCase
 
     public function testAllisOk()
     {
-        $black = ['2H', '3D', '5S', '9C', 'KD'];
-        $white = ['2C', '3H', '4S', '8C', 'AH'];
-        $this->round= new Round( Hand::fromArray($black), Hand::fromArray( $white));
+        $black = Hand::fromArray(['2H', '3D', '5S', '9C', 'KD']);
+        $white = Hand::fromArray(['2C', '3H', '4S', '8C', 'AH']);
+        $this->round= new Round( $black,  $white);
 
         $this->assertInstanceOf(Round::class, $this->round);
-
+        $this->assertInstanceOf(Hand::class, $black);
+        $this->assertInstanceOf(Hand::class, $white );
     }
 
-    public function test_it_should_compare_two_hands(){
+    public function test_it_should_return_two_high_cards(){
 
-        $black = ['2H', '3D', '5S', '9C', 'KD'];
-        $white = ['2C', '3H', '4S', '8C', 'AH'];
-      //  $this->round= new Round( Hand::fromArray($black), Hand::fromArray( $white));
-     //   $this->round->compare();
+        $black = Hand::fromArray(['2H', '3D', '5S', '9C', 'KD']);
+        $white = Hand::fromArray(['2C', '3H', '4S', '8C', 'AH']);
+        $this->round= new Round( $black,  $white);
 
-    }
-
-    public function test_it_should_compare_two_hands2(){
-
-        $black = ['2H', '3D', '5S', 'KS', 'KD'];
-        $white = ['2C', '3H', '4S', '8C', 'KH'];
-        $this->round= new Round( Hand::fromArray($black), Hand::fromArray( $white));
         $this->round->compare();
+
+        $this->assertEquals($black->getHighCard(),13);
+        $this->assertEquals($white->getHighCard(),14);
+    }
+
+    public function test_it_should_return_one_pair(){
+
+        $black = Hand::fromArray(['2H', '3D', '5S', 'KS', 'KD']);
+        $white = Hand::fromArray(['2C', '3H', '4S', '8C', 'KH']);
+        $this->round= new Round( $black,  $white);
+
+        $this->round->compare();
+
+        $this->assertEquals($black->getPairCards(), 'K');
+        $this->assertEquals($white->getPairCards(), 0);
 
     }
 

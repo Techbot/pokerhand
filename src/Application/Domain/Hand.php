@@ -16,6 +16,42 @@ class Hand
     private $card;
     private $highCard = 0;
 
+    public function evaluate(){
+        $card= 1;
+        foreach($this->hand as $suit => $value){
+            $this->card[$card] = $value;
+            $this->value[$card] = substr($value,0,1);
+            $this->suit[$card] = substr($value,1,1);
+            $this->score[$card] = $this->getScore($this->value[$card]);
+            $this->remainingHand[$card] = $this->score[$card];
+            $card++;
+        }
+        $analyser = new Analyser($this);
+
+        ///////////////////////////////////////
+        $this->highCard = $analyser->highCard();
+
+
+        ///////////////////////////////////////
+        $this->pairCards = $analyser->pairCards();
+
+        ///////////////////////////////////////
+        if  ($this->pairCards){
+            $this->secondPairCards = $analyser->twoPairCards();
+        };
+
+        ///////////////////////////////////////
+
+        if  ($this->pairCards){
+      //      $this->tripleCards = $analyser->tripleCards();
+        };
+
+
+
+
+
+    }
+
     /**
      * @return int
      */
@@ -54,25 +90,6 @@ class Hand
         return $newHand;
     }
 
-    public function evaluate(){
-        $card= 1;
-        foreach($this->hand as $suit => $value){
-            $this->card[$card] = $value;
-            $this->value[$card] = substr($value,0,1);
-            $this->suit[$card] = substr($value,1,1);
-            $this->score[$card] = $this->getScore($this->value[$card]);
-            $this->remainingHand[$card] = $this->score[$card];
-            $card++;
-        }
-        $analyser = new Analyser($this);
-
-        $this->highCard = $analyser->highCard();
-        $this->pairCards = $analyser->pairCards();
-        if  ($this->pairCards){
-            $this->secondPairCards = $analyser->twoPairCards();
-        };
-
-    }
 
     public function setHighCard($value)
     {
