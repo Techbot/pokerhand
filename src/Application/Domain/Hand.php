@@ -7,6 +7,14 @@ class Hand
     private $hand;
     public $highCard = 0;
     public $pairCards = 0;
+    public $secondPairCards = 0;
+    private $score;
+    public $remainingHand;
+    private $suit;
+    private $value;
+    private $card;
+
+
 
     /**
      * @return int
@@ -15,11 +23,7 @@ class Hand
     {
         return $this->pairCards;
     }
-    private $score;
-    public $remainingHand;
-    private $suit;
-    private $value;
-    private $card;
+
 
     /**
      * @return mixed
@@ -51,12 +55,16 @@ class Hand
             $this->suit[$card] = substr($value,1,1);
             $this->score[$card] = $this->getScore($this->value[$card]);
             $this->remainingHand[$card] = $this->score[$card];
-
-
             $card++;
         }
         $this->highCard();
         $this->pairCards();
+        if  ($this->pairCards()){
+            $this->twoPairCards();
+        };
+
+        print_r($this);
+
     }
 
     public function highCard()
@@ -73,23 +81,41 @@ class Hand
 
     public function pairCards()
     {
-
-
-
         $array=[];
         foreach ($this->value as $value) {
 
             if (in_array($value,$array)) {
 
                $this->pairCards=$value;
+
+                return true;
             }
             $array[]=$value;
         }
 
-        print_r($this);
-
-        return $this->pairCards;
+        return false;
     }
+
+    public function twoPairCards()
+    {
+        $array=[];
+        foreach ($this->value as $value) {
+
+           if ($value == $this->pairCards)
+           {
+               //skip
+           }
+            if (in_array($value,$array)) {
+
+                $this->secondPairCards=$value;
+            }
+            $array[]=$value;
+        }
+
+    }
+
+
+
 
     public function setHighCard($value)
     {

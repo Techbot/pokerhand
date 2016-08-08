@@ -41,6 +41,15 @@ class RoundTest extends WebTestCase
     public function test_it_should_compare_two_pairs(){
 
         $black = ['2H', '3D', '5S', '6S', '6D'];
+        $white = ['2C', '3H', '6H', '6C', 'KH'];
+        $this->round= new Round( Hand::fromArray($black), Hand::fromArray( $white));
+        $this->round->compare();
+
+    }
+
+    public function test_it_should_compare_two_sets_of_pairs(){
+
+        $black = ['2H', '3D', '5S', '6S', '6D'];
         $white = ['2C', '3H', '4S', '6C', '6H'];
         $this->round= new Round( Hand::fromArray($black), Hand::fromArray( $white));
         $this->round->compare();
