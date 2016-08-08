@@ -46,21 +46,30 @@ class RoundTest extends WebTestCase
 
     }
 
-    public function test_it_should_compare_two_pairs(){
+    public function test_it_should_return_two_pairs(){
 
-        $black = ['2H', '3D', '5S', '6S', '6D'];
-        $white = ['2C', '3H', '6H', '6C', 'KH'];
-        $this->round= new Round( Hand::fromArray($black), Hand::fromArray( $white));
+        $black = Hand::fromArray(['2H', '3D', '5S', '6S', '6D']);
+        $white = Hand::fromArray( ['2C', '3H', '6H', '6C', 'KH']);
+        $this->round= new Round( $black, $white);
         $this->round->compare();
 
+        $this->assertEquals($black->getPairCards(), 6);
+        $this->assertEquals($white->getPairCards(), 6);
     }
 
-    public function test_it_should_compare_two_sets_of_pairs(){
+    public function test_it_should_return_two_sets_of_pairs(){
 
-        $black = ['2H', '3D', '5S', '6S', '6D'];
-        $white = ['2C', '3H', '4S', '6C', '6H'];
-        $this->round= new Round( Hand::fromArray($black), Hand::fromArray( $white));
+        $black =  Hand::fromArray(['2H', '3D', '3S', '6S', '6D']);
+        $white =  Hand::fromArray(['2C', '3H', '3S', '6C', '6H']);
+
+        $this->round= new Round($black, $white);
+
         $this->round->compare();
 
+        $this->assertEquals( 3, $black->getPairCards());
+        $this->assertEquals( 3, $white->getPairCards());
+
+        $this->assertEquals( 6, $black->getSecondPairCards());
+        $this->assertEquals( 6, $white->getSecondPairCards());
     }
 }

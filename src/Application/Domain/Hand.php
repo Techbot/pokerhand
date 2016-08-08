@@ -9,6 +9,8 @@ class Hand
     private $hand;
     private $pairCards = 0;
     private $secondPairCards = 0;
+
+
     private $score;
     public $remainingHand;
     private $suit;
@@ -45,11 +47,14 @@ class Hand
         if  ($this->pairCards){
       //      $this->tripleCards = $analyser->tripleCards();
         };
+    }
 
-
-
-
-
+    /**
+     * @return int
+     */
+    public function getSecondPairCards()
+    {
+        return $this->secondPairCards;
     }
 
     /**

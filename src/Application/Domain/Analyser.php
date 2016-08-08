@@ -51,18 +51,18 @@ class Analyser
 
     public function twoPairCards()
     {
-        $array=[];
+        $arrayOfPairs=[];
         foreach ($this->hand->getValue() as $value) {
 
             if ($value == $this->hand->getPairCards())
             {
-                //skip
+                //skip: either the first pair or a triple. Only interested in different pair
             }
-            if (in_array($value,$array)) {
+            elseif (in_array($value,$arrayOfPairs)) {
 
                return $value;
             }
-            $array[]=$value;
+            $arrayOfPairs[]=$value;
         }
     }
 }
