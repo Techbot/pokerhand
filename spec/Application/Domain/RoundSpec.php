@@ -9,7 +9,6 @@ use Prophecy\Argument;
 
 class RoundSpec extends ObjectBehavior
 {
-
     function let()
     {
         $black = Hand::fromArray(['2H', '3D', '5S', '9C', 'KD']);

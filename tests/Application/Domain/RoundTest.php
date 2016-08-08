@@ -10,7 +10,6 @@ class RoundTest extends WebTestCase
 {
     private $round;
 
-
     public function testAllisOk()
     {
         $black = Hand::fromArray(['2H', '3D', '5S', '9C', 'KD']);
@@ -100,7 +99,6 @@ class RoundTest extends WebTestCase
 
     }
 
-
     public function test_it_should_return_one_straight(){
 
         $black = Hand::fromArray(['2H', '3H', '4S', '5C', '6D']);
@@ -109,10 +107,7 @@ class RoundTest extends WebTestCase
 
         $this->round->compare();
 
-      //  $this->assertEquals(6, $black->getStraightCards());
-       // $this->assertEquals( 0, $white->getStraightCards());
-
+        $this->assertEquals(6, $black->getStraightCards());
+        $this->assertEquals( 0, $white->getStraightCards());
     }
-
-
 }

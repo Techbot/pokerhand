@@ -72,10 +72,8 @@ class Hand
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-        print_r($this);
+      //  print_r($this);
     }
-
 
     /**
      * @return int
@@ -85,8 +83,6 @@ class Hand
         return $this->straightCards;
     }
 
-
-
     /**
      * @return int
      */
@@ -94,8 +90,6 @@ class Hand
     {
         return $this->pokerCards;
     }
-
-
 
     /**
      * @return int

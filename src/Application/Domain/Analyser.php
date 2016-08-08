@@ -92,13 +92,18 @@ class Analyser
     {
         $previousRank = 0;
 
-        foreach ($this->hand->getValue() as $key=>$value) {
+        foreach ($this->hand->getScore( $this->hand->getValue()) as $key=>$value) {
 
-            if ($value !== $previousRank + 1 && $key !==0 ){
+            if ($key==1){
+                $previousRank= $value;
+                continue;
+            }
+            if ($value == ($previousRank + 1) && $key>1 ){
+                $previousRank= $value;
+            }
+            else{
                 return false;
             }
-             $previousRank= $value;
-
         }
         return $value;
     }
