@@ -2,6 +2,8 @@
 
 namespace Application\Domain;
 
+use Application\Domain\Analyser;
+
 class Hand
 {
     private $hand;
@@ -57,65 +59,17 @@ class Hand
             $this->remainingHand[$card] = $this->score[$card];
             $card++;
         }
-        $this->highCard();
-        $this->pairCards();
+        $analyser = new Analyser();
+
+        $this->highCard = $analyser->highCard();
+        $this->pairCards = $analyser->pairCards();
         if  ($this->pairCards()){
-            $this->twoPairCards();
+            $this->secondPairCards = $analyser->twoPairCards();
         };
 
-        print_r($this);
+
 
     }
-
-    public function highCard()
-    {
-        foreach ($this->remainingHand as $score) {
-
-            if ($score > $this->highCard) {
-
-                $this->highCard = $score;
-            }
-        }
-        return $this->highCard;
-    }
-
-    public function pairCards()
-    {
-        $array=[];
-        foreach ($this->value as $value) {
-
-            if (in_array($value,$array)) {
-
-               $this->pairCards=$value;
-
-                return true;
-            }
-            $array[]=$value;
-        }
-
-        return false;
-    }
-
-    public function twoPairCards()
-    {
-        $array=[];
-        foreach ($this->value as $value) {
-
-           if ($value == $this->pairCards)
-           {
-               //skip
-           }
-            if (in_array($value,$array)) {
-
-                $this->secondPairCards=$value;
-            }
-            $array[]=$value;
-        }
-
-    }
-
-
-
 
     public function setHighCard($value)
     {

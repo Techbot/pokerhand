@@ -24,27 +24,27 @@ class Round
     public function compare()
     {
         $this->rankers[1] = new HighCardRanker($this->handOne, $this->handTwo);
-            $this->thing = $this->rankers[1]->comparePlayerCards();// Black wins, White wins or Tie
-            if ($this->thing == 'Tie') {
+        $this->thing = $this->rankers[1]->comparePlayerCards();// Black wins, White wins or Tie
+        if ($this->thing == 'Tie') {
 
-                $this->match($this->handOne->highCard(),$this->handTwo->highCard());
+            $this->match($this->handOne->highCard(), $this->handTwo->highCard());
 
-            } else {
-                return $this->thing;
-            }
+        } else {
+            return $this->thing;
+        }
 
         //return 'Next Card';
         $this->handOne->remainingHand = $this->handOne->getValue();
-        $this->rankers[2] = new PairRanker( $this->handOne, $this->handTwo);
+        $this->rankers[2] = new PairRanker($this->handOne, $this->handTwo);
 
-            $this->thing = $this->rankers[2]->comparePlayerCards();// Black wins, White wins or Tie
-            if ($this->thing == 'Tie') {
+        $this->thing = $this->rankers[2]->comparePlayerCards();// Black wins, White wins or Tie
+        if ($this->thing == 'Tie') {
 
-                $this->match($this->handOne->pairCards(), $this->handTwo->pairCards());
+            $this->match($this->handOne->pairCards(), $this->handTwo->pairCards());
 
-            } else {
-                return $this->thing;
-            }
+        } else {
+            return $this->thing;
+        }
 
         //$this->rankers[] = new TripleRanker( $this->handOne, $this->handTwo);
         //$this->rankers[] = new TwoPairRanker( $this->handOne, $this->handTwo);
