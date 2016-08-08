@@ -12,7 +12,7 @@ class Hand
     private $secondPairCards = 0;
     private $score;
     private $suit;
-    private $value;
+    private $rank;
     private $card;
     private $highCard = 0;
 
@@ -27,9 +27,9 @@ class Hand
         $card = 1;
         foreach ($this->hand as $suit => $card) {
             $this->card[$card] = $card;
-            $this->value[$card] = substr($card, 0, 1);
+            $this->rank[$card] = substr($card, 0, 1);
             $this->suit[$card] = new Suit(substr($card, 1, 1));
-            $this->score[$card] = $this->getScore($this->value[$card]); // in case it's a face card
+            $this->score[$card] = $this->getScore($this->rank[$card]); // in case it's a face card
             $this->remainingHand[$card] = $this->score[$card];
             $card++;
         }
@@ -95,9 +95,9 @@ class Hand
     }
 
 
-    public function setHighCard($value)
+    public function setHighCard($rank)
     {
-        $this->highCard = $value;
+        $this->highCard = $rank;
     }
 
     private function getFace($card)
@@ -147,7 +147,7 @@ class Hand
      */
     public function getValue()
     {
-        return $this->value;
+        return $this->rank;
     }
 
     /**
