@@ -7,13 +7,22 @@ use Application\Domain\Analyser;
 class Hand
 {
     private $hand;
-    public $highCard = 0;
+
+    private $highCard = 0;
+
+    /**
+     * @return int
+     */
+    public function getHighCard()
+    {
+        return $this->highCard;
+    }
     public $pairCards = 0;
     public $secondPairCards = 0;
     private $score;
     public $remainingHand;
     private $suit;
-    private $value;
+    public $value;
     private $card;
 
 
@@ -59,15 +68,13 @@ class Hand
             $this->remainingHand[$card] = $this->score[$card];
             $card++;
         }
-        $analyser = new Analyser();
+        $analyser = new Analyser($this);
 
         $this->highCard = $analyser->highCard();
         $this->pairCards = $analyser->pairCards();
-        if  ($this->pairCards()){
+        if  ($this->pairCards){
             $this->secondPairCards = $analyser->twoPairCards();
         };
-
-
 
     }
 

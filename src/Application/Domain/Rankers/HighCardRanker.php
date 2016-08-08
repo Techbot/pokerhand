@@ -17,15 +17,15 @@ class HighCardRanker
       //echo PHP_EOL . 'bl:' . $this->black->highCard() . PHP_EOL;
       //echo PHP_EOL .'wh:' . $this->white->highCard() . PHP_EOL;
 
-        if ($this->black->highCard() > $this->white->highCard()){
+        if ($this->black->getHighCard() > $this->white->getHighCard()){
 
-            return 'Black wins with' . $this->black->highCard();
+            return 'Black wins with' . $this->black->getHighCard();
 
         }
 
-        if ($this->black->highCard() < $this->white->highCard()){
+        if ($this->black->getHighCard() < $this->white->getHighCard()){
 
-            return 'white wins with' . $this->white->highCard();
+            return 'white wins with' . $this->white->getHighCard();
 
         }
         return 'Tie';

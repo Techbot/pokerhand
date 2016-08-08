@@ -10,22 +10,35 @@ namespace Application\Domain;
 
 class Analyser
 {
+
+    private $hand;
+    private $highCard;
+
+    function __construct($hand){
+
+        $this->hand = $hand;
+
+    }
+
+
+
     public function highCard()
     {
-        foreach ($this->remainingHand as $score) {
 
-            if ($score > $this->highCard) {
+        foreach ($this->hand->remainingHand as $score) {
 
-                $this->highCard = $score;
+            if ($score > $this->hand->getHighCard()) {
+
+                $highCard=$score;
             }
         }
-        return $this->highCard;
+        return $highCard;
     }
 
     public function pairCards()
     {
         $array=[];
-        foreach ($this->value as $value) {
+        foreach ($this->hand->value as $value) {
 
             if (in_array($value,$array)) {
 
@@ -39,9 +52,9 @@ class Analyser
     public function twoPairCards()
     {
         $array=[];
-        foreach ($this->value as $value) {
+        foreach ($this->hand->value as $value) {
 
-            if ($value == $this->pairCards)
+            if ($value == $this->hand->pairCards)
             {
                 //skip
             }

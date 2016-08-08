@@ -27,7 +27,7 @@ class Round
         $this->thing = $this->rankers[1]->comparePlayerCards();// Black wins, White wins or Tie
         if ($this->thing == 'Tie') {
 
-            $this->match($this->handOne->highCard(), $this->handTwo->highCard());
+            $this->match($this->handOne->getHighCard(), $this->handTwo->getHighCard());
 
         } else {
             return $this->thing;
@@ -40,7 +40,7 @@ class Round
         $this->thing = $this->rankers[2]->comparePlayerCards();// Black wins, White wins or Tie
         if ($this->thing == 'Tie') {
 
-            $this->match($this->handOne->pairCards(), $this->handTwo->pairCards());
+            $this->match($this->handOne->getPairCards(), $this->handTwo->getPairCards());
 
         } else {
             return $this->thing;
