@@ -33,7 +33,7 @@ class Round
             return $this->thing;
         }
         //return 'Next Card';
-        $this->handOne->remainingHand = $this->handOne->getValue();
+        $this->handOne->remainingHand = $this->handOne->getRank();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -61,17 +61,17 @@ class Round
     function match($compareToOne, $compareToTwo)
     {
         $index = 1;
-        foreach ($this->handOne->remainingHand as $element) {
+        foreach ($this->handOne->remainingHand as $rank) {
 
-            if ($element == $compareToOne) {
+            if ($rank->getInt() == $compareToOne) {
                 unset($this->handOne->remainingHand[$index]);
             }
             $index++;
         }
 
         $index = 1;
-        foreach ($this->handTwo->remainingHand as $element) {
-            if ($element == $compareToTwo) {
+        foreach ($this->handTwo->remainingHand as $rank) {
+            if ($rank->getInt() == $compareToTwo) {
                 unset($this->handTwo->remainingHand[$index]);
             }
             $index++;

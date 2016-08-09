@@ -29,8 +29,8 @@ class HandTest extends \PHPUnit_Framework_TestCase
     }
 
     public function test_it_should_return_5_values(){
-        $this->assertCount(5, $this->black->getValue());
-        $this->assertCount(5, $this->white->getValue());
+        $this->assertCount(5, $this->black->getRank());
+        $this->assertCount(5, $this->white->getRank());
     }
 
     public function test_it_should_return_5_suits(){

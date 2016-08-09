@@ -41,7 +41,7 @@ class RoundTest extends WebTestCase
 
         $this->round->compare();
 
-        $this->assertEquals($black->getPairCards(), 'K');
+        $this->assertEquals($black->getPairCards(), 13);
         $this->assertEquals($white->getPairCards(), 0);
 
     }
@@ -81,7 +81,7 @@ class RoundTest extends WebTestCase
 
         $this->round->compare();
 
-        $this->assertEquals('K', $black->getTripleCards());
+        $this->assertEquals(13, $black->getTripleCards());
         $this->assertEquals( 0, $white->getTripleCards());
 
     }
@@ -94,7 +94,7 @@ class RoundTest extends WebTestCase
 
         $this->round->compare();
 
-        $this->assertEquals('K', $black->getPokerCards());
+        $this->assertEquals(13, $black->getPokerCards());
         $this->assertEquals( 0, $white->getPokerCards());
 
     }
@@ -107,7 +107,8 @@ class RoundTest extends WebTestCase
 
         $this->round->compare();
 
-        $this->assertEquals(6, $black->getStraightCards());
+
+        $this->assertEquals( 6, $black->getStraightCards());
         $this->assertEquals( 0, $white->getStraightCards());
     }
 

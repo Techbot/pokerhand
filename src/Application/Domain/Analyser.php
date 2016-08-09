@@ -19,11 +19,11 @@ class Analyser
 
     public function highCard()
     {
-        foreach ($this->hand->getRemainingHand() as $score) {
+        foreach ($this->hand->getRemainingHand() as $rank) {
 
-            if ($score > $this->hand->getHighCard()) {
+            if ($rank->getInt() > $this->hand->getHighCard()) {
 
-                $highCard=$score;
+                $highCard=$rank->getInt();
             }
         }
         return $highCard;
@@ -32,13 +32,13 @@ class Analyser
     public function pairCards()
     {
         $array=[];
-        foreach ($this->hand->getValue() as $value) {
+        foreach ($this->hand->getRank() as $rank) {
 
-            if (in_array($value,$array)) {
+            if (in_array($rank->getInt(),$array)) {
 
-                return $value;
+                return $rank->getInt();
             }
-            $array[]=$value;
+            $array[]=$rank->getInt();
         }
         return false;
     }
@@ -46,17 +46,17 @@ class Analyser
     public function twoPairCards()
     {
         $arrayOfPairs=[];
-        foreach ($this->hand->getValue() as $value) {
+        foreach ($this->hand->getRank() as $rank) {
 
-            if ($value == $this->hand->getPairCards())
+            if ($rank->getInt() == $this->hand->getPairCards())
             {
                 //skip: either the first pair or a triple. Only interested in different pair
             }
-            elseif (in_array($value,$arrayOfPairs)) {
+            elseif (in_array($rank->getInt(), $arrayOfPairs)) {
 
-               return $value;
+               return $rank->getInt();
             }
-            $arrayOfPairs[]=$value;
+            $arrayOfPairs[]=$rank->getInt();
         }
     }
 
@@ -72,11 +72,11 @@ class Analyser
     public function tripleCards()
     {
         $arrayOfTriples = [];
-        foreach ($this->hand->getValue() as $value) {
-            if ($value == $this->hand->getPairCards() ||$value == $this->hand->getSecondPairCards() ) {
-                $arrayOfTriples[] = $value;
+        foreach ($this->hand->getRank() as $rank) {
+            if ($rank->getInt() == $this->hand->getPairCards() ||$rank->getInt() == $this->hand->getSecondPairCards() ) {
+                $arrayOfTriples[] = $rank->getInt();
                 if (count($arrayOfTriples) === 3) {
-                    return $value;
+                    return $rank->getInt();
                 }
             }
         }
@@ -86,11 +86,11 @@ class Analyser
     public function pokerCards()
     {
         $arrayOfPokers = [];
-        foreach ($this->hand->getValue() as $value) {
-            if ($value == $this->hand->getTripleCards()) {
-                $arrayOfPokers[] = $value;
+        foreach ($this->hand->getRank() as $rank) {
+            if ($rank->getInt() == $this->hand->getTripleCards()) {
+                $arrayOfPokers[] = $rank->getInt();
                 if (count($arrayOfPokers) === 4) {
-                    return $value;
+                    return $rank->getInt();
                 }
             }
         }
@@ -101,20 +101,20 @@ class Analyser
     {
         $previousRank = 0;
 
-        foreach ($this->hand->getScore( $this->hand->getValue()) as $key=>$value) {
+        foreach ($this->hand->getScore( $this->hand->getRank()) as $key=>$rank) {
 
             if ($key==1){
-                $previousRank= $value;
+                $previousRank= $rank->getInt();
                 continue;
             }
-            if ($value == ($previousRank + 1) && $key>1 ){
-                $previousRank= $value;
+            if ($rank->getInt() == ($previousRank + 1) && $key>1 ){
+                $previousRank= $rank->getInt();
             }
             else{
-                return false;
+              return false;
             }
         }
-        return $value;
+        return $rank->getInt();
     }
 
     public function flushCards()

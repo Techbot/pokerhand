@@ -11,7 +11,38 @@ class Rank
      */
     public function getInt()
     {
-        return $this->rank;
+        $int = $this->rank;
+
+        if ($int == 'T') {
+
+            return 10;
+
+        }
+
+        if ($int == 'J') {
+
+            return 11;
+
+        }
+
+        if ($int == 'Q') {
+
+            return 12;
+
+        }
+
+        if ($int == 'K') {
+
+            return 13;
+
+        }
+
+        if ($int == 'A') {
+
+            return 14;
+
+        }
+        return $int;
     }
 
     public function __construct($rank)
