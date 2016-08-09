@@ -60,11 +60,20 @@ class Analyser
         }
     }
 
+    public function houseCards()
+    {
+            if ($this->hand->getPairCards() && $this->hand->getSecondPairCards() && $this->hand->getTripleCards()            )
+            {
+                return true; // can probably find values from get pair and get triple
+            }
+            return false;
+    }
+
     public function tripleCards()
     {
         $arrayOfTriples = [];
         foreach ($this->hand->getValue() as $value) {
-            if ($value == $this->hand->getPairCards()) {
+            if ($value == $this->hand->getPairCards() ||$value == $this->hand->getSecondPairCards() ) {
                 $arrayOfTriples[] = $value;
                 if (count($arrayOfTriples) === 3) {
                     return $value;

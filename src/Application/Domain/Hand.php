@@ -15,6 +15,7 @@ class Hand
     private $pokerCards = 0;
     private $straightCards = 0;
     private $flush = 0;
+    private $house = 0;
     private $score;
     private $suit;
     private $rank;
@@ -85,7 +86,11 @@ class Hand
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-      //  print_r($this);
+        if ($this->pairCards && $this->tripleCards) {
+            $this->house = $analyser->houseCards();
+        };
+
+        print_r($this);
     }
 
     /**
@@ -110,6 +115,14 @@ class Hand
     public function getPokerCards()
     {
         return $this->pokerCards;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHouse()
+    {
+        return $this->house;
     }
 
     /**
@@ -151,8 +164,6 @@ class Hand
     {
         return $this->remainingHand;
     }
-
-
 
     public function setHighCard($rank)
     {

@@ -122,4 +122,16 @@ class RoundTest extends WebTestCase
         $this->assertEquals('D', $black->getFlush());
         $this->assertEquals( 0, $white->getFlush());
     }
+
+    public function test_it_should_return_one_house(){
+
+        $black = Hand::fromArray(['2D', '2H', '4D', '4C', '4S']);
+        $white = Hand::fromArray(['2C', '3H', '3S', '5C', '6H']);
+        $this->round= new Round( $black,  $white);
+
+        $this->round->compare();
+
+        $this->assertEquals( true, $black->getHouse());
+        $this->assertEquals( 0, $white->getHouse());
+    }
 }
