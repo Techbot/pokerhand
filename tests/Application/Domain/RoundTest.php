@@ -45,9 +45,7 @@ class RoundTest extends WebTestCase
         $black = Hand::fromArray(['2H', '3D', '5S', 'KS', 'KD']);
         $white = Hand::fromArray(['2C', '3H', '4S', '8C', 'KH']);
         $this->round= new Round( $black,  $white);
-
         $this->round->compare();
-
         $this->assertEquals($black->getPairCards(), 13);
         $this->assertEquals($white->getPairCards(), 0);
 

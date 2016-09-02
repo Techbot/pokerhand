@@ -8,7 +8,6 @@ class Hand
 {
     public $remainingHand;
     private $hand;
-
     private $pairCards = 0;
     private $secondPairCards = 0;
     private $tripleCards = 0;
@@ -78,19 +77,19 @@ class Hand
             $this->straightCards = $analyser->straightCards();
         };
 
-        ///////////////////////////////////Only test for flush if you have a straight/////////////////////////////
+        ///////////////////////////////////Only test for flush if you have a straight///////////////////////////////////
 
         if ($this->straightCards) {
             $this->flush = $analyser->flushCards();
         };
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////Only test for house if you have a pair and an triple Duh!///////////////////
 
         if ($this->pairCards && $this->tripleCards) {
             $this->house = $analyser->houseCards();
         };
 
-        print_r($this);
+
     }
 
     /**
@@ -168,25 +167,9 @@ class Hand
     public function setHighCard($rank)
     {
         $this->highCard = $rank;
-        //$this->highCard = $rank->getInt();
     }
 
-    private function getFace($card)
-    {
-        if ($card == 14) {
-            return 'Ace';
-        }
-        if ($card == 13) {
-            return 'King';
-        }
-        if ($card == 12) {
-            return 'Queen';
-        }
-        if ($card == 11) {
-            return 'Jack';
-        }
-        return $card;
-    }
+
 
     public function getScore($card)
     {
@@ -202,7 +185,10 @@ class Hand
         if ($card == 'J') {
             return 11;
         }
-        return $card;
+        if ($card == 'T') {
+            return 10;
+        }
+         return $card;
     }
 
     /**
