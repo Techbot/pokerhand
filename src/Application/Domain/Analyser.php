@@ -19,10 +19,9 @@ class Analyser
 
     public function highCard()
     {
+        $highCard=0;
         foreach ($this->hand->getRemainingHand() as $rank) {
-
             if ($rank->getInt() > $this->hand->getHighCard()) {
-
                 $highCard=$rank->getInt();
             }
         }
@@ -33,9 +32,7 @@ class Analyser
     {
         $array=[];
         foreach ($this->hand->getRank() as $rank) {
-
             if (in_array($rank->getInt(),$array)) {
-
                 return $rank->getInt();
             }
             $array[]=$rank->getInt();
@@ -47,13 +44,11 @@ class Analyser
     {
         $arrayOfPairs=[];
         foreach ($this->hand->getRank() as $rank) {
-
             if ($rank->getInt() == $this->hand->getPairCards())
             {
                 //skip: either the first pair or a triple. Only interested in different pair
             }
             elseif (in_array($rank->getInt(), $arrayOfPairs)) {
-
                return $rank->getInt();
             }
             $arrayOfPairs[]=$rank->getInt();
@@ -62,11 +57,11 @@ class Analyser
 
     public function houseCards()
     {
-            if ($this->hand->getPairCards() && $this->hand->getSecondPairCards() && $this->hand->getTripleCards()            )
-            {
-                return true; // can probably find values from get pair and get triple
-            }
-            return false;
+        if ($this->hand->getPairCards() && $this->hand->getSecondPairCards() && $this->hand->getTripleCards()            )
+        {
+            return true; // can probably find values from get pair and get triple
+        }
+        return false;
     }
 
     public function tripleCards()
@@ -100,9 +95,7 @@ class Analyser
     public function straightCards()
     {
         $previousRank = 0;
-
         foreach ($this->hand->getScore( $this->hand->getRank()) as $key=>$rank) {
-
             if ($key==1){
                 $previousRank= $rank->getInt();
                 continue;
