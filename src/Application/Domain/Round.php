@@ -63,8 +63,10 @@ class Round
         }
         else {
             echo $result . PHP_EOL;
+
             $result =  $this->highCardCompare();
             echo  $result .  PHP_EOL;
+            return $result;
         }
     }
 
@@ -141,12 +143,12 @@ class Round
 
         if ($this->handOne->getHighCard() > $this->handTwo->getHighCard()) {
 
-            echo 'black has won';
+          //  echo 'black has won';
             return 'Black wins';
         }
         if ($this->handOne->getHighCard() < $this->handTwo->getHighCard()) {
 
-            echo 'white has won';
+      //      echo 'white has won';
             return 'white wins';
         } else {
             $this->nextHighCard();
