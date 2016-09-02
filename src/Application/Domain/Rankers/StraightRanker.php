@@ -4,7 +4,7 @@ namespace Application\Domain\Rankers;
 
 use Application\Domain\Hand;
 
-class TripleRanker
+class StraightRanker
 {
     public function __construct(Hand $black,Hand $white)
     {

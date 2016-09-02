@@ -14,6 +14,10 @@ class TripleRanker
 
     public function comparePlayerCards(){
 
+        if ($this->black->getTripleCards()==0 && $this->white->getTripleCards()==0){
+            return 'no triples';
+        }
+
         if ($this->black->getTripleCards()  > $this->white->getTripleCards()){
             return 'Black wins with Pair of ' . $this->black->getTwoPairCards();
         }

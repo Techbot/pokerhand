@@ -4,7 +4,7 @@ namespace Application\Domain\Rankers;
 
 use Application\Domain\Hand;
 
-class TripleRanker
+class FlushRanker
 {
     public function __construct(Hand $black,Hand $white)
     {
@@ -14,11 +14,18 @@ class TripleRanker
 
     public function comparePlayerCards(){
 
-        if ($this->black->getTripleCards()  > $this->white->getTripleCards()){
-            return 'Black wins with Pair of ' . $this->black->getTwoPairCards();
+        if ($this->black->getFlush()==0 && $this->white->getFlush()==0){
+
+            return 'no flushes';
+
         }
-        if ($this->black->getTripleCards() < $this->white->getTripleCards()){
-            return 'white wins with Pair of' . $this->white->getTripleCards();
+
+        if ($this->black->getFlush()  > $this->white->getFlush()){
+            return 'Black wins with a Flush to  ' . $this->black->getFlush();
+        }
+
+        if ($this->black->getFlush() < $this->white->getFlush()){
+            return 'white wins with a Flush to' . $this->white->getFlush();
         }
         return 'Tie';
     }

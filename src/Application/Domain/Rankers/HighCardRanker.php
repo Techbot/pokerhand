@@ -14,8 +14,6 @@ class HighCardRanker
 
     public function comparePlayerCards(){
 
-      //echo PHP_EOL . 'bl:' . $this->black->highCard() . PHP_EOL;
-      //echo PHP_EOL .'wh:' . $this->white->highCard() . PHP_EOL;
 
         if ($this->black->getHighCard() > $this->white->getHighCard()){
 

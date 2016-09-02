@@ -14,6 +14,10 @@ class PairRanker
 
     public function comparePlayerCards(){
 
+        if ($this->black->getPairCards()==0 && $this->white->getPairCards()==0){
+            return 'no pairs';
+        }
+
         if ($this->black->getPairCards()  > $this->white->getPairCards()){
             return 'Black wins with Pair of ' . $this->black->getPairCards();
         }
