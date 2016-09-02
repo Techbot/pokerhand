@@ -66,6 +66,7 @@ class Round
 
             $result =  $this->highCardCompare();
             echo  $result .  PHP_EOL;
+            echo $this->message;
             return $result;
         }
     }
@@ -144,13 +145,19 @@ class Round
         if ($this->handOne->getHighCard() > $this->handTwo->getHighCard()) {
 
           //  echo 'black has won';
-            return 'Black wins';
+
+            $this->message='black wins with High Card ' . $this->handOne->getHighCard() ;
+
+            return 'Black wins'; // seems to get lost in recursive call
         }
         if ($this->handOne->getHighCard() < $this->handTwo->getHighCard()) {
 
       //      echo 'white has won';
+            $this->message='white wins with High Card ' . $this->handTwo->getHighCard() ;
             return 'white wins';
         } else {
+
+            // todo: put in final check: if no remain cards to be removed ie Tie
             $this->nextHighCard();
         }
     }
