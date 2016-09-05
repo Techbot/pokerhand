@@ -68,82 +68,6 @@ class Round
         }
     }
 
-    function flushCompare()
-    {
-        echo 'flush Test' . PHP_EOL;
-        $this->rankers = new FlushRanker($this->handOne, $this->handTwo);
-        $this->thing = $this->rankers->comparePlayerCards();// Black wins, White wins or Tie or no flushes
-        if ($this->thing == 'Tie') {
-            $this->nextHighCard();
-        } else {
-            return $this->thing;
-        }
-    }
-
-    function pokerCompare()
-    {
-        echo 'poker Test' . PHP_EOL;
-        $this->rankers = new PokerRanker( $this->handOne, $this->handTwo);
-        $this->thing = $this->rankers->comparePlayerCards();// Black wins, White wins or Tie or no pokers
-        if ($this->thing == 'Tie') {
-            $this->nextHighCard();
-        } else {
-            return $this->thing;
-        }
-    }
-
-
-    function highCardCompare()
-        {
-            echo 'High Card Test' . PHP_EOL;
-            $this->rankers = new HighCardRanker($this->handOne, $this->handTwo);
-            $this->thing = $this->rankers->comparePlayerCards();// Black wins, White wins or Tie
-
-            if ($this->thing == 'Tie') {
-                $this->nextHighCard();
-            } else {
-
-                return $this->thing;
-            }
-        }
-
-
-
-    function pairCompare()
-    {
-        echo 'Pair Test' . PHP_EOL;
-        $this->rankers = new PairRanker($this->handOne, $this->handTwo);
-        $this->thing = $this->rankers->comparePlayerCards();// Black wins, White wins or Tie
-        if ($this->thing == 'Tie') {
-            $this->nextHighCard();
-        } else {
-            return $this->thing;
-        }
-    }
-
-    function tripleCompare()
-    {
-        echo 'Triple Test' . PHP_EOL;
-        $this->rankers = new TripleRanker($this->handOne, $this->handTwo);
-        $this->thing = $this->rankers->comparePlayerCards();// Black wins, White wins or Tie or no Triples
-        if ($this->thing == 'Tie') {
-            $this->nextHighCard();
-        } else {
-            return $this->thing;
-        }
-    }
-
-    function twoPairCompare()
-    {
-        echo 'Two Pair Test' . PHP_EOL;
-        $this->rankers = new TwoPairRanker( $this->handOne, $this->handTwo);
-        $this->thing = $this->rankers->comparePlayerCards();// Black wins, White wins or Tie or no TwoPair
-        if ($this->thing == 'Tie') {
-            $this->nextHighCard();
-        } else {
-            return $this->thing;
-        }
-    }
 
 
     function nextHighCard()
@@ -161,35 +85,24 @@ class Round
         $this->handOne->setHighCard ($analyser1->highCard());
         $this->handTwo->setHighCard ($analyser2->highCard());
 
-
         echo($this->handOne->getHighCard());
         echo($this->handTwo->getHighCard());
+
         if ($this->handOne->getHighCard() > $this->handTwo->getHighCard()) {
-
-
             //  $this->message='black wins with High Card ' . $this->handOne->getHighCard() ;
-
             $message = 'Black wins';
             return $message; // seems to get lost in recursive call
         }
         if ($this->handOne->getHighCard() < $this->handTwo->getHighCard()) {
-
             //      echo 'white has won';
             //    $this->message='white wins with High Card ' . $this->handTwo->getHighCard() ;
-
             $message = 'White wins';
             return $message;
         } else {
-
             // todo: put in final check: if no remain cards to be removed ie Tie
             $message = $this->nextHighCard();
-
             //  echo $message;
-
             return $message;
         }
     }
-
-
 }
-
