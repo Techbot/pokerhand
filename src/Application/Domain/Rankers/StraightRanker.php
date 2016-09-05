@@ -2,23 +2,17 @@
 
 namespace Application\Domain\Rankers;
 
-use Application\Domain\Hand;
-
 class StraightRanker
 {
-    public function __construct(Hand $black,Hand $white)
-    {
-        $this->black = $black;
-        $this->white = $white;
-    }
-
-    public function comparePlayerCards(){
-
-        if ($this->black->getTripleCards()  > $this->white->getTripleCards()){
-            return 'Black wins with Pair of ' . $this->black->getTwoPairCards();
+    public static function comparePlayerCards($black, $white){
+        if ($black->getStraighCards()==0 && $white->getStraighCards()==0){
+            return 'none';
         }
-        if ($this->black->getTripleCards() < $this->white->getTripleCards()){
-            return 'white wins with Pair of' . $this->white->getTripleCards();
+        if ($black->getStraighCards()  > $white->getStraightCards()){
+            return 'Black wins with Pair of ' . $black->getStraightCards();
+        }
+        if ($black->getStraightCards() < $white->getStraightCards()){
+            return 'white wins with Pair of' . $white->getStraightCards();
         }
         return 'Tie';
     }

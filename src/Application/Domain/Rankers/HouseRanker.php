@@ -2,31 +2,17 @@
 
 namespace Application\Domain\Rankers;
 
-use Application\Domain\Hand;
-
 class HouseRanker
 {
-    public function __construct(Hand $black,Hand $white)
-    {
-        $this->black = $black;
-        $this->white = $white;
-    }
-
-    public function comparePlayerCards(){
-
-        if ($this->black->getFlush()==0 && $this->white->getFlush()==0){
-
-            return 'no flushes';
-
+    public static function comparePlayerCards($black, $white){
+        if ($black->getFlush()==0 && $white->getFlush()==0){
+            return 'none';
         }
-
-
-
-        if ($this->black->getTripleCards()  > $this->white->getTripleCards()){
-            return 'Black wins with Pair of ' . $this->black->getTwoPairCards();
+        if ($black->getFlush()  > $white->getFlush()){
+            return 'Black wins with Pair of ' . $black->getFlush();
         }
-        if ($this->black->getTripleCards() < $this->white->getTripleCards()){
-            return 'white wins with Pair of' . $this->white->getTripleCards();
+        if ($black->getFlush() < $white->getFlush()){
+            return 'white wins with Pair of' . $white->getFlush();
         }
         return 'Tie';
     }
