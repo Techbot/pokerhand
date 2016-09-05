@@ -88,8 +88,6 @@ class Hand
         if ($this->pairCards && $this->tripleCards) {
             $this->house = $analyser->houseCards();
         };
-
-
     }
 
     /**

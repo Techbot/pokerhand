@@ -25,12 +25,12 @@ class RoundTest extends WebTestCase
 */
     public function test_it_should_return_two_high_cards(){
 
-        $black = Hand::fromArray(['2H', '3D', '5S', '8C', 'KD']);
-        $white = Hand::fromArray(['2C', '3H', '4S', '8C', 'KH']);
+        $black = Hand::fromArray(['2H', '5D', '6S', '8C', 'KD']);
+        $white = Hand::fromArray(['2C', '4H', '6S', '8C', 'KH']);
         $this->round= new Round( $black,  $white);
         $result = $this->round->compare();
 
-        echo 'the returned values is' . $result . PHP_EOL;
+        echo 'the returned values is ' . $result[0] . PHP_EOL;
 
         echo 'end'. PHP_EOL;
 

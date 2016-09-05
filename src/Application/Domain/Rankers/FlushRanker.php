@@ -6,6 +6,9 @@ class FlushRanker
 {
     public static function comparePlayerCards($black, $white){
 
+
+        echo 'hi';
+
         if ($black->getFlush()==0 && $white->getFlush()==0){
             return 'none';
         }
