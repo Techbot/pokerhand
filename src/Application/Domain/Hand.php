@@ -6,7 +6,7 @@ use Application\Domain\Analyser;
 
 class Hand
 {
-    public $remainingHand;
+    public $remainingHand=[];
     private $hand;
     private $pairCards = 0;
     private $secondPairCards = 0;
@@ -155,7 +155,7 @@ class Hand
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getRemainingHand()
     {
