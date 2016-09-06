@@ -5,14 +5,14 @@ namespace Application\Domain\Rankers;
 class HouseRanker
 {
     public static function comparePlayerCards($black, $white){
-        if ($black->getFlush()==0 && $white->getFlush()==0){
+        if ($black->getHouse()==0 && $white->getHouse()==0){
             return 'none';
         }
-        if ($black->getFlush()  > $white->getFlush()){
-            return 'Black wins with Pair of ' . $black->getFlush();
+        if ($black->getHouse()  > $white->getHouse()){
+            return 'Black wins with House of ' . $black->getHouse();
         }
-        if ($black->getFlush() < $white->getFlush()){
-            return 'white wins with Pair of' . $white->getFlush();
+        if ($black->getHouse() < $white->getFlush()){
+            return 'white wins with House of' . $white->getHouse();
         }
         return 'Tie';
     }

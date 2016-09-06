@@ -9,10 +9,10 @@ class StraightRanker
             return 'none';
         }
         if ($black->getStraighCards()  > $white->getStraightCards()){
-            return 'Black wins with Pair of ' . $black->getStraightCards();
+            return 'Black wins with Straight of ' . $black->getStraightCards();
         }
         if ($black->getStraightCards() < $white->getStraightCards()){
-            return 'white wins with Pair of' . $white->getStraightCards();
+            return 'white wins with Straight of' . $white->getStraightCards();
         }
         return 'Tie';
     }

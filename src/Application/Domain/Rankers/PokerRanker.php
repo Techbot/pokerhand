@@ -11,10 +11,10 @@ class PokerRanker
         }
 
         if ($black->getTripleCards()  > $white->getTripleCards()){
-            return 'Black wins with Pair of ' . $black->getTwoPairCards();
+            return 'Black wins with Poker of ' . $black->getTwoPairCards();
         }
         if ($black->getTripleCards() < $white->getTripleCards()){
-            return 'white wins with Pair of' . $white->getTripleCards();
+            return 'white wins with Poker of' . $white->getTripleCards();
         }
         return 'Tie';
     }
